@@ -1,8 +1,8 @@
-import react from 'react';
-import Search from "./Component/Search";
+import react from "react";
+import Meteo from "./Component/Meteo";
 
-export default class App extends react.Component { 
-  render(){
-    return <Search />;
+export default class App extends react.Component {
+  render() {
+    return <Meteo />;
   }
 }

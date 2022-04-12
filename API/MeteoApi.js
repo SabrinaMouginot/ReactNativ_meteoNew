@@ -1,7 +1,7 @@
 import axios from "axios";
 import { API_TOKEN } from "@env";
 
-const getEphemeride = async (text, page) => {
+const getEphemeride = async (text) => {
   const url =
     "https://api.meteo-concept.com/api/ephemeride/0?token=" +
     API_TOKEN +
@@ -12,7 +12,15 @@ const getEphemeride = async (text, page) => {
   console.log(url);
   console.log(response.data);
   console.log("--fin getEphemeride--");
-  return response.data;
+
+  const url2 =
+    "https://api.meteo-concept.com/api/forecast/daily/0?token=" +
+    API_TOKEN +
+    "&insee=67482";
+  // await slowNetwork();
+  const response2 = await axios.get(url2);
+
+  return { e: response.data, f: response2.data };
 };
 
 const sleep = (milliseconds) => {
