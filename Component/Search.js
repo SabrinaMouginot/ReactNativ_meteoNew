@@ -36,8 +36,10 @@ const styles = StyleSheet.create({
 });
 
 class Search extends React.Component {
+  //La class représente une connexion avec le serveur de base de données.
   // ajouter la prop films, une liste vide au départ
   constructor(props) {
+    //constructor est une méthode qui est utilisée pour créer et initialiser un objet lorsqu'on utilise le mot clé class.
     super(props);
     this.state = {
       films: [],
@@ -53,7 +55,7 @@ class Search extends React.Component {
     this.searchedText = text; // Modification du texte recherché à chaque saisie de texte, sans passer par setState
   }
 
-  _searchFilms() {
+  _searchEphemerides() {
     this.page = 0;
     this.totalPages = 0;
 
@@ -112,52 +114,22 @@ class Search extends React.Component {
     }
   }
 
-  // //Prise en charge du clic sur un film
-  // displayDetailForFilm = (idFilm) => {
-  //   console.log("film.id=" + idFilm);
-  //   this.props.navigation.navigate("FilmDetail", { idFilm: idFilm });
-  // }; //il faut ensuite appeler la fonction displayDetailForFilm dans le component FilmItem.
-
   render() {
     const film = this.props.film;
     return (
       <SafeAreaView style={styles.main_container}>
         <TextInput
-          style={styles.textinput}
-          placeholder="Titre du film"
-          onChangeText={(text) => this._searchTextInputChanged(text)}
-          onSubmitEditing={() => this._searchFilms()}
+          onSubmitEditing={() => this._searchEphemerides()}
           //onSubmitEditing: rappel appelé quand le bouton d'envoi de l'entrée de texte est enfoncé.
         />
         {/* <View> */}
-        <Button title="Rechercher" onPress={() => this._searchFilms()} />
+        <Button
+          title="Ephémérides à Strasbourg"
+          onPress={() => this._searchEphemerides()}
+        />
         <JSONPretty id="json-pretty" data={this.state.films}></JSONPretty>
         <View style={{ flex: 1 }} contentContainerStyle={{ flex: 1 }}>
-          {/* <FlatList
-            onLayout={(e) => {
-              this.setState({ height: e.nativeEvent.layout.height }); //setstate pr ne pas charger les données à l'infini
-              // console.log(e.nativeEvent.layout.height);
-            }}
-            style={{
-              flexGrow: 1,
-              height: this.state.height,
-            }}
-            onEndReachedThreshold={0.5}
-            onEndReached={() => {
-              if (this.page < this.totalPages) {
-                // On vérifie qu'on n'a pas atteint la fin de la pagination (totalPages) avant de charger plus d'éléments
-                this._loadFilms();
-              }
-            }}
-            data={this.state.films}
-            keyExtractor={(item) => item.id}
-            renderItem={({ item }) => (
-              <FilmItem
-                film={item}
-                displayDetailForFilm={this.displayDetailForFilm}
-              />
-            )}
-          /> */}
+
         </View>
         {/* </View> */}
         {this._displayLoading()}
