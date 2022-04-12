@@ -19,6 +19,7 @@ const sleep = (milliseconds) => {
   return new Promise((resolve) => setTimeout(resolve, milliseconds));
 };
 
+//L'asynchrone, c'est ne pas attendre la fin de l'exécution d'une action avant de continuer l'exécution du code
 async function slowNetwork() {
   await sleep(5000);
 }
