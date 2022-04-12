@@ -37,12 +37,11 @@ const styles = StyleSheet.create({
 
 class Search extends React.Component {
   //La class représente une connexion avec le serveur de base de données.
-  // ajouter la prop films, une liste vide au départ
   constructor(props) {
     //constructor est une méthode qui est utilisée pour créer et initialiser un objet lorsqu'on utilise le mot clé class.
     super(props);
     this.state = {
-      films: [],
+      Ephemeride: [],
       height: 0,
       isLoading: false, // Par défaut à false car il n'y a pas de chargement tant qu'on ne lance pas de recherche
     };
@@ -55,7 +54,7 @@ class Search extends React.Component {
     this.searchedText = text; // Modification du texte recherché à chaque saisie de texte, sans passer par setState
   }
 
-  _searchEphemerides() {
+  _searchEphemeride() {
     this.page = 0;
     this.totalPages = 0;
 
@@ -65,18 +64,18 @@ class Search extends React.Component {
     //      une fonction callback qui est appelée lorsque tout est prêt
     this.setState(
       {
-        films: [],
+        Ephemeride: [],
       },
       () => {
-        console.log(this.state.films.length);
-        this._loadFilms();
+        console.log(this.state.Ephemeride.length);
+        this._loadEphemeride();
       }
     );
   }
 
   // Bien noter les deux setState
   //   isLoading: True puis appel API puis lorsque l'API a répondu isLoading: False
-  _loadFilms() {
+  _loadEphemeride() {
     if (!this.state.isLoading) {
       this.setState({
         isLoading: true,
@@ -87,17 +86,17 @@ class Search extends React.Component {
         this.setState({
           // ... syntaxe Javascript ES6 qui permet de recopier
           // et de fusionner les deux tableaux
-          // ⟺ films: this.state.films.concat(data.results)
-          films: data,
+          // ⟺ Ephemeride: this.state.Ephemeride.concat(data.results)
+          Ephemeride: data,
           isLoading: false,
         });
 
         console.log(
-          "--_loadFilms\n" +
+          "--_loadEphemeride\n" +
             JSON.stringify(data) +
-            "\n_loadFilms--" +
+            "\n_loadEphemeride--" +
             data.results[0].original_title +
-            "\n--_loadFilms--"
+            "\n--_loadEphemeride--"
         );
       });
     }
@@ -115,22 +114,20 @@ class Search extends React.Component {
   }
 
   render() {
-    const film = this.props.film;
+    const Ephemerid = this.props.Ephemerid;
     return (
       <SafeAreaView style={styles.main_container}>
         <TextInput
-          onSubmitEditing={() => this._searchEphemerides()}
+          onSubmitEditing={() => this._searchEphemeride()}
           //onSubmitEditing: rappel appelé quand le bouton d'envoi de l'entrée de texte est enfoncé.
         />
         {/* <View> */}
         <Button
-          title="Ephémérides à Strasbourg"
-          onPress={() => this._searchEphemerides()}
+          title="Ephéméride à Strasbourg"
+          onPress={() => this._searchEphemeride()}
         />
-        <JSONPretty id="json-pretty" data={this.state.films}></JSONPretty>
-        <View style={{ flex: 1 }} contentContainerStyle={{ flex: 1 }}>
-
-        </View>
+        <JSONPretty id="json-pretty" data={this.state.Ephemeride}></JSONPretty>
+        <View style={{ flex: 1 }} contentContainerStyle={{ flex: 1 }}></View>
         {/* </View> */}
         {this._displayLoading()}
       </SafeAreaView>
