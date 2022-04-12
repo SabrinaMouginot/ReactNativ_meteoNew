@@ -15,6 +15,7 @@ const styles = StyleSheet.create({
   main_container: {
     marginTop: 50,
     flex: 1,
+    backgroundColor: "#ffff4f",
   },
   textinput: {
     marginLeft: 5,
@@ -24,6 +25,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     paddingLeft: 5,
   },
+
   loading_container: {
     position: "absolute",
     left: 0,
